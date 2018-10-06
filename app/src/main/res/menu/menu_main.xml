@@ -2,32 +2,41 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/menu_CZigzag"
-        android:title="@string/Cifrar_ZigZag" app:showAsAction="never">
-    </item>
-    <item android:id="@+id/menu_DZigzag"
+    <item
+        android:id="@+id/menu_CZigzag"
+        android:title="@string/Cifrar_ZigZag"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_DZigzag"
         android:icon="@android:drawable/ic_menu_search"
+        android:orderInCategory="2"
         android:title="@string/Descifrar_ZigZag"
-        android:orderInCategory="2"
-        app:showAsAction="never"/>
-    <item android:id="@+id/menu_CTransposicion"
-        android:title="@string/Cifrar_Transposicion"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_DTransposicion"
         android:orderInCategory="3"
-        app:showAsAction="never"/>
-    <item android:id="@+id/menu_DTransposicion"
-        android:title="@string/Descifrar_Transposicion" app:showAsAction="never">
-    </item>
-    <item android:id="@+id/menu_CCesar"
-        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/Descifrar_Transposicion"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_DCesar"
+        android:orderInCategory="3"
         android:title="@string/Cifrar_Cesar"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_CTransposicion"
+        android:layout_height="match_parent"
+        android:icon="@android:drawable/ic_menu_search"
         android:orderInCategory="2"
-        app:showAsAction="never"/>
-    <item android:id="@+id/DCesar"
-        android:title="@string/Descifrar_Cesar"
+        android:title="@string/Cifrar_Transposicion"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/DCesar"
         android:orderInCategory="3"
-        app:showAsAction="never"/>
-    <item android:id="@+id/Salir"
-        android:title="@string/menu_Salir"
+        android:title="@string/Descifrar_Cesar"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/Salir"
         android:orderInCategory="4"
-        app:showAsAction="never"/>
+        android:title="@string/menu_Salir"
+        app:showAsAction="never" />
 </menu>
