@@ -47,7 +47,7 @@ public class DZigzag extends AppCompatActivity {
                 break;
             case R.id.btnDescifrar:
                 if(uri != null){
-                    if(uri.getPath().contains(".txt")){
+                    if(uri.getPath().contains(".cif")){
                         if(!txtClave.getText().toString().isEmpty()){
                             cadenaDescifrada = "";
                             ZigZag zigZag = new ZigZag();
@@ -71,7 +71,7 @@ public class DZigzag extends AppCompatActivity {
                         }
                     }
                     else{
-                        Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo .txt para descifrar", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo .cif para descifrar", Toast.LENGTH_LONG).show();
                     }
                 }
                 else{
