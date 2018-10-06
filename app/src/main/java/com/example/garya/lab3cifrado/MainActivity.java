@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 uri2 = data.getData();
                 if(Escritor.Escribir(uri2, this.getApplication(), cadenaCifrada)){
-                    Toast.makeText(this.getApplicationContext(), "Archivo comprimido en " + uri2.getPath(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this.getApplicationContext(), "Archivo cifrado en " + uri2.getPath(), Toast.LENGTH_LONG).show();
                 }
                 else{
                     Toast.makeText(this.getApplicationContext(), "Error al generar el archivo cifrado, verifique si la aplicación tiene permisos de escritura", Toast.LENGTH_LONG).show();
