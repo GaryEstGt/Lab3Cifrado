@@ -5,6 +5,6 @@
     <string name="Cifrar_Transposicion">Cifrar transposicion</string>
     <string name="Descifrar_Transposicion">Descifrar ZigZag</string>
     <string name="Cifrar_Cesar">Cifrar transposicion</string>
-    <string name="Descifrar_Cesar">Descifrar transposicion</string>
+    <string name="Descifrar_Cesar">Descifrar cesar</string>
     <string name="menu_Salir">Salir</string>
 </resources>

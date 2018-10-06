@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.garya.lab3cifrado">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -17,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DZigzag" />
+        <activity android:name=".CTransposicion" />
+        <activity android:name=".DTransposicion" />
+        <activity android:name=".CCesar" />
+        <activity android:name=".DCesar"></activity>
     </application>
 
 </manifest>
