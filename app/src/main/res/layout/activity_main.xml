@@ -25,7 +25,7 @@
         android:text="Cifrado Zig Zag" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnAbrirArchivo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -35,7 +35,7 @@
         android:text="Abrir Archivo" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txtArchivo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -45,11 +45,11 @@
         android:text="Archivo" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tvMostrarArchivo"
         android:layout_width="312dp"
         android:layout_height="226dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/button"
+        android:layout_alignStart="@+id/btnAbrirArchivo"
         android:layout_marginBottom="127dp"
         android:fadeScrollbars="true"
         android:isScrollContainer="true"
@@ -75,11 +75,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/txtClave"
-        android:layout_alignStart="@+id/button"
+        android:layout_alignStart="@+id/btnAbrirArchivo"
         android:text="Clave" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnCifrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
