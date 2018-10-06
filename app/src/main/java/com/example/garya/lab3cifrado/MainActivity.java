@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnCifrar;
 
     Uri uri, uri2;
+    private String cadenaCifrada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,37 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(intent, "Choose File"), 0);
                 break;
             case R.id.btnCifrar:
+                if(uri != null){
+                    if(uri.getPath().contains(".txt")){
+                        if(!txtClave.getText().toString().isEmpty()){
+                            cadenaCifrada = "";
+                            ZigZag zigZag = new ZigZag();
+                            int clave = 0;
+                            try{
+                                clave = Integer.parseInt(txtClave.getText().toString());
+                                cadenaCifrada = zigZag.Cifrar(tvMostrarArchivo.getText().toString(), clave);
+                                if(cadenaCifrada != "ERROR"){
+                                    ElegirRutaCifrado();
+                                }
+                                else{
+                                    Toast.makeText(this.getApplicationContext(), "Error al cifrar", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                            catch (Exception e){
+                                Toast.makeText(this.getApplicationContext(), "Error al cifrar", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        else{
+                            Toast.makeText(this.getApplicationContext(), "Debe ingresar la clave del cifrado", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo .txt para cifrar", Toast.LENGTH_LONG).show();
+                    }
+                }
+                else{
+                    Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo para cifrar", Toast.LENGTH_LONG).show();
+                }
                 break;
         }
     }
@@ -73,9 +105,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 1:
                 uri2 = data.getData();
-                /*if(huffman.GenerarArchivosCompresion(uri2)){
+                if(Escritor.Escribir(uri2, this.getApplication(), cadenaCifrada)){
                     Toast.makeText(this.getApplicationContext(), "Archivo comprimido en " + uri2.getPath(), Toast.LENGTH_LONG).show();
-                }*/
+                }
+                else{
+                    Toast.makeText(this.getApplicationContext(), "Error al generar el archivo cifrado, verifique si la aplicación tiene permisos de escritura", Toast.LENGTH_LONG).show();
+                }
                 break;
         }
     }
