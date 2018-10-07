@@ -18,7 +18,7 @@
         android:title="@string/Descifrar_Transposicion"
         app:showAsAction="never" />
     <item
-        android:id="@+id/menu_DCesar"
+        android:id="@+id/menu_CCesar"
         android:orderInCategory="3"
         android:title="@string/Cifrar_Cesar"
         app:showAsAction="never" />

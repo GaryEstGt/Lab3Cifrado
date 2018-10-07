@@ -1,9 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CTransposicion">
 
-</android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="Cifrado Zig Zag" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="Cifrado  Ruta" />
+
+    <Button
+        android:id="@+id/btnAbrirArchivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="101dp"
+        android:text="Abrir Archivo"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="48dp" />
+
+    <TextView
+        android:id="@+id/txtArchivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="104dp"
+        android:layout_marginTop="113dp"
+        android:text="Archivo"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="104dp" />
+
+    <TextView
+        android:id="@+id/tvMostrarArchivo"
+        android:layout_width="312dp"
+        android:layout_height="226dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btnAbrirArchivo"
+        android:layout_marginBottom="127dp"
+        android:editable="false"
+        android:fadeScrollbars="true"
+        android:isScrollContainer="true"
+        android:scrollHorizontally="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="horizontal|vertical"
+        android:text="Texto"
+        android:layout_alignLeft="@+id/btnAbrirArchivo" />
+
+    <EditText
+        android:id="@+id/txtClave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="67dp"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtClave"
+        android:layout_alignStart="@+id/btnAbrirArchivo"
+        android:text="Clave"
+        android:layout_alignLeft="@+id/btnAbrirArchivo" />
+
+    <Button
+        android:id="@+id/btnCifrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
+        android:text="Cifrar" />
+
+</RelativeLayout>
