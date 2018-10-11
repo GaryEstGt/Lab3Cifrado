@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DTransposicion extends AppCompatActivity {
+public class CRuta extends AppCompatActivity {
 
     @BindView(R.id.textView3)
     TextView textView3;
@@ -31,13 +31,13 @@ public class DTransposicion extends AppCompatActivity {
     TextView textView6;
     @BindView(R.id.txtColumna)
     EditText txtColumna;
-    Uri uri;
     Uri uri2;
-    String cadenaCifrada="";
+    Uri uri;
+    String cadenaCifrada = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dtransposicion);
+        setContentView(R.layout.activity_cruta);
         ButterKnife.bind(this);
     }
 
@@ -51,20 +51,19 @@ public class DTransposicion extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_CZigzag:
-                Intent intentCZig = new Intent(DTransposicion.this, MainActivity.class);
+                Intent intentCZig = new Intent(CRuta.this, MainActivity.class);
                 startActivity(intentCZig);
                 return true;
             case R.id.menu_DZigzag:
-                Intent intentDZig = new Intent(DTransposicion.this, DZigzag.class);
+                Intent intentDZig = new Intent(CRuta.this, DZigzag.class);
                 startActivity(intentDZig);
                 return true;
             case R.id.menu_CTransposicion:
-                Intent intentDT = new Intent(DTransposicion.this, CRuta.class);
-                startActivity(intentDT);
-
+                Toast.makeText(this.getApplicationContext(), "Ya esta en Cifrar Ruta", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.menu_DTransposicion:
-                Toast.makeText(this.getApplicationContext(), "Ya esta en descifrar Ruta", Toast.LENGTH_LONG).show();
+                Intent intentDT = new Intent(CRuta.this, DTransposicion.class);
+                startActivity(intentDT);
                 return true;
             case R.id.Salir:
                 finish();
@@ -88,7 +87,7 @@ public class DTransposicion extends AppCompatActivity {
                 break;
             case R.id.btnCifrar:
                 if (uri != null) {
-                    if (uri.getPath().contains(".cif")) {
+                    if (uri.getPath().contains(".txt")) {
                         if (!txtClave.getText().toString().isEmpty()) {
                             int fila = 0;
                             int columna = 0;
@@ -104,23 +103,22 @@ public class DTransposicion extends AppCompatActivity {
                                 boolean verificacion=Transpocision.validarClave(columna,fila,contenido);
                                 if (verificacion) {
                                     Transpocision.LlenarMatriz(contenido);
-                                    cadenaCifrada = Transpocision.EscribirMatriz(1);
-
+                                    cadenaCifrada = Transpocision.EscribirMatriz(2);
                                     ElegirRutaCifrado();
                                 } else {
-                                    Toast.makeText(this.getApplicationContext(), "Error al descifrar", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(this.getApplicationContext(), "Error al cifrar", Toast.LENGTH_LONG).show();
                                 }
                             } catch (Exception e) {
-                                Toast.makeText(this.getApplicationContext(), "Error al descifrar", Toast.LENGTH_LONG).show();
+                                Toast.makeText(this.getApplicationContext(), "Error al cifrar", Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(this.getApplicationContext(), "Debe ingresar la clave del descifrado", Toast.LENGTH_LONG).show();
+                            Toast.makeText(this.getApplicationContext(), "Debe ingresar la clave del cifrado", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo .txt para descifrar", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo .txt para cifrar", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo para descifrar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo para cifrar", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -129,7 +127,7 @@ public class DTransposicion extends AppCompatActivity {
         Intent intent2 = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent2.addCategory(Intent.CATEGORY_OPENABLE);
         intent2.setType("*/*");
-        intent2.putExtra(Intent.EXTRA_TITLE, txtArchivo.getText().toString().split("\\.")[0] + ".txt");
+        intent2.putExtra(Intent.EXTRA_TITLE, txtArchivo.getText().toString().split("\\.")[0] + ".cif");
         startActivityForResult(intent2, 1);
     }
 
@@ -158,11 +156,10 @@ public class DTransposicion extends AppCompatActivity {
                 break;
             case 1:
                 uri2 = data.getData();
-
                 if (Escritor.Escribir(uri2, this.getApplication(), cadenaCifrada)) {
-                    Toast.makeText(this.getApplicationContext(), "Archivo descifrado en " + uri2.getPath(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this.getApplicationContext(), "Archivo cifrado en " + uri2.getPath(), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(this.getApplicationContext(), "Error al generar el archivo descifrado, verifique si la aplicación tiene permisos de escritura", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this.getApplicationContext(), "Error al generar el archivo cifrado, verifique si la aplicación tiene permisos de escritura", Toast.LENGTH_LONG).show();
                 }
                 break;
         }

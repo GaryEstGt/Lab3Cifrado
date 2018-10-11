@@ -11,8 +11,6 @@ import java.io.InputStreamReader;
 public class Lector {
 
     public static String LeerArchivo(Application application, Uri archivo) throws IOException {
-        Cursor returnCursor1 = application.getContentResolver().query(archivo, null, null, null, null);
-        returnCursor1.moveToFirst();
         InputStream IS = application.getContentResolver().openInputStream(archivo);
         BufferedReader BR = new BufferedReader(new InputStreamReader(IS));
         StringBuilder SB = new StringBuilder();

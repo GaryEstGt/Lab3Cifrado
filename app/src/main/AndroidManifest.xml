@@ -22,7 +22,8 @@
         <activity android:name=".CTransposicion" />
         <activity android:name=".DTransposicion" />
         <activity android:name=".CCesar" />
-        <activity android:name=".DCesar"></activity>
+        <activity android:name=".DCesar" />
+        <activity android:name=".CRuta"></activity>
     </application>
 
 </manifest>

@@ -18,21 +18,11 @@
         android:title="@string/Descifrar_Transposicion"
         app:showAsAction="never" />
     <item
-        android:id="@+id/menu_CCesar"
-        android:orderInCategory="3"
-        android:title="@string/Cifrar_Cesar"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/menu_CTransposicion"
         android:layout_height="match_parent"
         android:icon="@android:drawable/ic_menu_search"
         android:orderInCategory="2"
         android:title="@string/Cifrar_Transposicion"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/DCesar"
-        android:orderInCategory="3"
-        android:title="@string/Descifrar_Cesar"
         app:showAsAction="never" />
     <item
         android:id="@+id/Salir"

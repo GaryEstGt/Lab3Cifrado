@@ -56,20 +56,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentDZig);
                 return true;
             case R.id.menu_CTransposicion:
-                Intent intentCT = new Intent(MainActivity.this, CTransposicion.class);
+                Intent intentCT = new Intent(MainActivity.this, CRuta.class);
                 startActivity(intentCT);
                 return true;
             case R.id.menu_DTransposicion:
                 Intent intentDT = new Intent(MainActivity.this, DTransposicion.class);
                 startActivity(intentDT);
-                return true;
-            case R.id.menu_CCesar:
-                Intent intentCC = new Intent(MainActivity.this, CCesar.class);
-                startActivity(intentCC);
-                return true;
-            case R.id.DCesar:
-                Intent intentDC= new Intent(MainActivity.this, DCesar.class);
-                startActivity(intentDC);
                 return true;
             case R.id.Salir:
                 finish();
