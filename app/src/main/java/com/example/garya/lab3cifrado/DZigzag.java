@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class DZigzag extends AppCompatActivity {
 
     @BindView(R.id.btnAbrirArchivo)
     Button btnAbrirArchivo;
@@ -26,56 +24,20 @@ public class MainActivity extends AppCompatActivity {
     TextView tvMostrarArchivo;
     @BindView(R.id.txtClave)
     EditText txtClave;
-    @BindView(R.id.btnCifrar)
-    Button btnCifrar;
+    @BindView(R.id.btnDescifrar)
+    Button btnDescifrar;
 
     Uri uri, uri2;
-    private String cadenaCifrada;
+    String cadenaDescifrada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_dzigzag);
         ButterKnife.bind(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_CZigzag:
-                Toast.makeText(this.getApplicationContext(), "Ya esta en Cifrar zig zag", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.menu_DZigzag:
-                Intent intentDZig = new Intent(MainActivity.this, DZigzag.class);
-                startActivity(intentDZig);
-                return true;
-            case R.id.menu_CTransposicion:
-                Intent intentCT = new Intent(MainActivity.this, CRuta.class);
-                startActivity(intentCT);
-                return true;
-            case R.id.menu_DTransposicion:
-                Intent intentDT = new Intent(MainActivity.this, DTransposicion.class);
-                startActivity(intentDT);
-                return true;
-            case R.id.Salir:
-                finish();
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @OnClick({R.id.btnAbrirArchivo, R.id.btnCifrar})
+    @OnClick({R.id.btnAbrirArchivo, R.id.btnDescifrar})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnAbrirArchivo:
@@ -83,37 +45,37 @@ public class MainActivity extends AppCompatActivity {
                 intent.setType("*/*");
                 startActivityForResult(Intent.createChooser(intent, "Choose File"), 0);
                 break;
-            case R.id.btnCifrar:
+            case R.id.btnDescifrar:
                 if(uri != null){
-                    if(uri.getPath().contains(".txt")){
+                    if(uri.getPath().contains(".cif")){
                         if(!txtClave.getText().toString().isEmpty()){
-                            cadenaCifrada = "";
+                            cadenaDescifrada = "";
                             ZigZag zigZag = new ZigZag();
                             int clave = 0;
                             try{
                                 clave = Integer.parseInt(txtClave.getText().toString());
-                                cadenaCifrada = zigZag.Cifrar(tvMostrarArchivo.getText().toString(), clave);
-                                if(cadenaCifrada != "ERROR"){
-                                    ElegirRutaCifrado();
+                                cadenaDescifrada = zigZag.Descifrar(tvMostrarArchivo.getText().toString(), clave);
+                                if(cadenaDescifrada != "ERROR"){
+                                    ElegirRutaDescifrado();
                                 }
                                 else{
-                                    Toast.makeText(this.getApplicationContext(), "Error al cifrar", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(this.getApplicationContext(), "Error al descifrar", Toast.LENGTH_LONG).show();
                                 }
                             }
                             catch (Exception e){
-                                Toast.makeText(this.getApplicationContext(), "Error al cifrar", Toast.LENGTH_LONG).show();
+                                Toast.makeText(this.getApplicationContext(), "Error al descifrar", Toast.LENGTH_LONG).show();
                             }
                         }
                         else{
-                            Toast.makeText(this.getApplicationContext(), "Debe ingresar la clave del cifrado", Toast.LENGTH_LONG).show();
+                            Toast.makeText(this.getApplicationContext(), "Debe ingresar la clave del descifrado", Toast.LENGTH_LONG).show();
                         }
                     }
                     else{
-                        Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo .txt para cifrar", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo .cif para descifrar", Toast.LENGTH_LONG).show();
                     }
                 }
                 else{
-                    Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo para cifrar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo para descifrar", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -143,21 +105,21 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 1:
                 uri2 = data.getData();
-                if(Escritor.Escribir(uri2, this.getApplication(), cadenaCifrada)){
-                    Toast.makeText(this.getApplicationContext(), "Archivo cifrado en " + uri2.getPath(), Toast.LENGTH_LONG).show();
+                if(Escritor.Escribir(uri2, this.getApplication(), cadenaDescifrada)){
+                    Toast.makeText(this.getApplicationContext(), "Archivo descifrado en " + uri2.getPath(), Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(this.getApplicationContext(), "Error al generar el archivo cifrado, verifique si la aplicación tiene permisos de escritura", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this.getApplicationContext(), "Error al generar el archivo descifrado, verifique si la aplicación tiene permisos de escritura", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
     }
 
-    public void ElegirRutaCifrado(){
+    public void ElegirRutaDescifrado(){
         Intent intent2 = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent2.addCategory(Intent.CATEGORY_OPENABLE);
         intent2.setType("*/*");
-        intent2.putExtra(Intent.EXTRA_TITLE, txtArchivo.getText().toString().split("\\.")[0] + ".cif");
+        intent2.putExtra(Intent.EXTRA_TITLE, txtArchivo.getText().toString().split("\\.")[0] + ".txt");
         startActivityForResult(intent2, 1);
     }
 }

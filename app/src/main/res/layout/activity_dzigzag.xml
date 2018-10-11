@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".DZigzag">
 
     <TextView
         android:id="@+id/textView2"
@@ -13,16 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="38dp"
-        android:text="Cifrado Zig Zag" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
-        android:text="Cifrado Zig Zag" />
+        android:text="Descifrado Zig Zag" />
 
     <Button
         android:id="@+id/btnAbrirArchivo"
@@ -32,9 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="48dp"
         android:layout_marginTop="101dp"
-        android:text="Abrir Archivo"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="48dp" />
+        android:text="Abrir Archivo" />
 
     <TextView
         android:id="@+id/txtArchivo"
@@ -44,9 +33,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="104dp"
         android:layout_marginTop="113dp"
-        android:text="Archivo"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="104dp" />
+        android:text="Archivo" />
 
     <TextView
         android:id="@+id/tvMostrarArchivo"
@@ -62,8 +49,7 @@
         android:scrollbarAlwaysDrawHorizontalTrack="true"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbars="horizontal|vertical"
-        android:text="Texto"
-        android:layout_alignLeft="@+id/btnAbrirArchivo" />
+        android:text="Texto" />
 
     <EditText
         android:id="@+id/txtClave"
@@ -74,9 +60,7 @@
         android:layout_marginBottom="67dp"
         android:layout_marginEnd="40dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="40dp" />
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textView6"
@@ -84,16 +68,15 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/txtClave"
         android:layout_alignStart="@+id/btnAbrirArchivo"
-        android:text="Clave"
-        android:layout_alignLeft="@+id/btnAbrirArchivo" />
+        android:text="Clave" />
 
     <Button
-        android:id="@+id/btnCifrar"
+        android:id="@+id/btnDescifrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="11dp"
-        android:text="Cifrar" />
+        android:text="Descifrar" />
 
 </RelativeLayout>
