@@ -70,8 +70,27 @@ public class SDES {
 
     public void Cifrar(char letra){
         int num = letra;
+
         String bits = Integer.toBinaryString(num);
-        
+
+        int cerosFaltantes = 8 - bits.length()%8;
+
+        if(cerosFaltantes == 8){
+            cerosFaltantes = 0;
+        }
+
+        for (int i = 0; i < cerosFaltantes; i++) {
+            bits = "0" + bits;
+        }
+
+        String ip = IP(bits);
+        String ep = EP(ip.substring(4,8));
+        String xor1 = XOR(ep,clave1);
+        String box1 = SBoxes1(xor1.substring(0,4));
+        String box2 = SBoxes2(xor1.substring(4,8));
+        String p4 = P4(box1 + box2);
+        String xor2 = XOR(ip.substring(0,4), p4);
+        String switch1 = Switch(xor2 + ip.substring(4,8));
     }
 
     //Recibe 10 bits
