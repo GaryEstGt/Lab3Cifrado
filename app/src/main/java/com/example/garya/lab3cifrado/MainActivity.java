@@ -37,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        SDES sdes = new SDES();
-        sdes.GenerarLlaves("1010101010");
-        sdes.Cifrar('A');
-        sdes.Descifrar('¹');
     }
 
     @Override

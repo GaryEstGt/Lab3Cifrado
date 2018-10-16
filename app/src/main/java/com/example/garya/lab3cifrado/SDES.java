@@ -2,59 +2,20 @@ package com.example.garya.lab3cifrado;
 
 public class SDES {
 
-    String[][] SBox0;
-    String[][] SBox1;
-    String OrdenP10;
-    String OrdenP8;
-    String OrdenP4;
-    String OrdenEP;
-    String OrdenIP;
+    String[][] SBox0 = {{"01","00","11","10"},{"11","10","01","00"},{"00","10","01","11"},{"11","01","11","10"}};
+    String[][] SBox1 = {{"00","01","10","11"},{"10","00","01","11"},{"11","00","01","00"},{"10","01","00","11"}};
+
+    String OrdenP10 = "3406179825";
+    String OrdenP8 = "35261704";
+    String OrdenP4 = "0231";
+    String OrdenEP = "63724105";
+    String OrdenIP = "23567104";
+
     String clave1;
     String clave2;
 
-    public SDES(){
-        SBox0 = new String[4][4];
-        SBox1 = new String[4][4];
-        OrdenP10 = "3406179825";
-        OrdenP8 = "35261704";
-        OrdenP4 = "0231";
-        OrdenEP = "63724105";
-        OrdenIP = "23567104";
-
-        SBox0[0][0] = "01";
-        SBox0[0][1] = "00";
-        SBox0[0][2] = "11";
-        SBox0[0][3] = "10";
-        SBox0[1][0] = "11";
-        SBox0[1][1] = "10";
-        SBox0[1][2] = "01";
-        SBox0[1][3] = "00";
-        SBox0[2][0] = "00";
-        SBox0[2][1] = "10";
-        SBox0[2][2] = "01";
-        SBox0[2][3] = "11";
-        SBox0[3][0] = "11";
-        SBox0[3][1] = "01";
-        SBox0[3][2] = "11";
-        SBox0[3][3] = "10";
-
-        SBox1[0][0] = "00";
-        SBox1[0][1] = "01";
-        SBox1[0][2] = "10";
-        SBox1[0][3] = "11";
-        SBox1[1][0] = "10";
-        SBox1[1][1] = "00";
-        SBox1[1][2] = "01";
-        SBox1[1][3] = "11";
-        SBox1[2][0] = "11";
-        SBox1[2][1] = "00";
-        SBox1[2][2] = "01";
-        SBox1[2][3] = "00";
-        SBox1[3][0] = "10";
-        SBox1[3][1] = "01";
-        SBox1[3][2] = "00";
-        SBox1[3][3] = "11";
-
+    public SDES(String bits){
+        GenerarLlaves(bits);
     }
 
     public void GenerarLlaves(String bits){
@@ -68,7 +29,7 @@ public class SDES {
         clave2 = P8(ls21 + ls22);
     }
 
-    public void Cifrar(char letra){
+    public char Cifrar(char letra){
         int num = letra;
 
         String bits = Integer.toBinaryString(num);
@@ -84,23 +45,13 @@ public class SDES {
         }
 
         String ip = IP(bits);
-        String ep = EP(ip.substring(4,8));
-        String xor1 = XOR(ep,clave1);
-        String box1 = SBoxes1(xor1.substring(0,4));
-        String box2 = SBoxes2(xor1.substring(4,8));
-        String p4 = P4(box1 + box2);
-        String xor2 = XOR(ip.substring(0,4), p4);
-        String switch1 = Switch(xor2 + ip.substring(4,8));
-        String ep2 = EP(switch1.substring(4,8));
-        String xor3 = XOR(ep2,clave2);
-        String box3 = SBoxes1(xor3.substring(0,4));
-        String box4 = SBoxes2(xor3.substring(4,8));
-        String p42 = P4(box3 + box4);
-        String xor4 = XOR(switch1.substring(0,4), p42);
-        String ipInverso = PermutacionInversa(xor4 + switch1.substring(4,8));
-
+        String xor1 = XOR(EP(ip.substring(4,8)),clave1);
+        String switch1 = Switch(XOR(ip.substring(0,4), P4(SBoxes1(xor1.substring(0,4)) + SBoxes2(xor1.substring(4,8)))) + ip.substring(4,8));
+        String xor3 = XOR(EP(switch1.substring(4, 8)), clave2);
+        return (char)Integer.parseInt(PermutacionInversa(XOR(P4(SBoxes1(xor3.substring(0,4)) + SBoxes2(xor3.substring(4,8))), switch1.substring(0,4)) + switch1.substring(4,8)),2);
     }
-    public void Descifrar(char letra){
+
+    public char Descifrar(char letra){
         int num = letra;
 
         String bits = Integer.toBinaryString(num);
@@ -116,20 +67,10 @@ public class SDES {
         }
 
         String ip = IP(bits);
-        String ep = EP(ip.substring(4,8));
-        String xor1 = XOR(ep,clave2);
-        String box1 = SBoxes1(xor1.substring(0,4));
-        String box2 = SBoxes2(xor1.substring(4,8));
-        String p4 = P4(box1 + box2);
-        String xor2 = XOR(ip.substring(0,4), p4);
-        String switch1 = Switch(xor2 + ip.substring(4,8));
-        String ep2 = EP(switch1.substring(4,8));
-        String xor3 = XOR(ep2,clave1);
-        String box3 = SBoxes1(xor3.substring(0,4));
-        String box4 = SBoxes2(xor3.substring(4,8));
-        String p42 = P4(box3 + box4);
-        String xor4 = XOR(switch1.substring(0,4), p42);
-        String ipInverso = PermutacionInversa(xor4 + switch1.substring(4,8));
+        String xor1 = XOR(EP(ip.substring(4,8)),clave2);
+        String switch1 = Switch(XOR(ip.substring(0,4), P4(SBoxes1(xor1.substring(0,4)) + SBoxes2(xor1.substring(4,8)))) + ip.substring(4,8));
+        String xor3 = XOR(EP(switch1.substring(4, 8)), clave1);
+        return (char)Integer.parseInt(PermutacionInversa(XOR(P4(SBoxes1(xor3.substring(0,4)) + SBoxes2(xor3.substring(4,8))), switch1.substring(0,4)) + switch1.substring(4,8)),2);
     }
     //Recibe 10 bits
     public String P10(String cadena){
