@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +37,55 @@ public class DZigzag extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dzigzag);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_CZigzag:
+                finish();
+                Intent intentCZ = new Intent(DZigzag.this, MainActivity.class);
+                startActivity(intentCZ);
+                return true;
+            case R.id.menu_DZigzag:
+                Toast.makeText(this.getApplicationContext(), "Ya esta en Descifrar zig zag", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.menu_CTransposicion:
+                finish();
+                Intent intentCT = new Intent(DZigzag.this, CRuta.class);
+                startActivity(intentCT);
+                return true;
+            case R.id.menu_DTransposicion:
+                finish();
+                Intent intentDT = new Intent(DZigzag.this, DTransposicion.class);
+                startActivity(intentDT);
+                return true;
+            case R.id.menu_CSDES:
+                finish();
+                Intent intentCS = new Intent(DZigzag.this, CSDES.class);
+                startActivity(intentCS);
+                return true;
+            case R.id.menu_DSDES:
+                finish();
+                Intent intentDS = new Intent(DZigzag.this, DSDES.class);
+                startActivity(intentDS);
+                return true;
+            case R.id.Salir:
+                finish();
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @OnClick({R.id.btnAbrirArchivo, R.id.btnDescifrar})

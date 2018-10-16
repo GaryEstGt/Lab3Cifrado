@@ -52,16 +52,29 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this.getApplicationContext(), "Ya esta en Cifrar zig zag", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.menu_DZigzag:
+                finish();
                 Intent intentDZig = new Intent(MainActivity.this, DZigzag.class);
                 startActivity(intentDZig);
                 return true;
             case R.id.menu_CTransposicion:
+                finish();
                 Intent intentCT = new Intent(MainActivity.this, CRuta.class);
                 startActivity(intentCT);
                 return true;
             case R.id.menu_DTransposicion:
+                finish();
                 Intent intentDT = new Intent(MainActivity.this, DTransposicion.class);
                 startActivity(intentDT);
+                return true;
+            case R.id.menu_CSDES:
+                finish();
+                Intent intentCS = new Intent(MainActivity.this, CSDES.class);
+                startActivity(intentCS);
+                return true;
+            case R.id.menu_DSDES:
+                finish();
+                Intent intentDS = new Intent(MainActivity.this, DSDES.class);
+                startActivity(intentDS);
                 return true;
             case R.id.Salir:
                 finish();

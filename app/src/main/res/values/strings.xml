@@ -2,9 +2,9 @@
     <string name="app_name">Lab3Cifrado</string>
     <string name="Cifrar_ZigZag">Cifrar ZigZag</string>
     <string name="Descifrar_ZigZag">Descifrar ZigZag</string>
-    <string name="Cifrar_Transposicion">Cifrar transposicion</string>
-    <string name="Descifrar_Transposicion">Descifrar Transpocision</string>
-    <string name="Cifrar_Cesar">Cifrar Cesar</string>
-    <string name="Descifrar_Cesar">Descifrar cesar</string>
+    <string name="Cifrar_Ruta">Cifrar Ruta</string>
+    <string name="Descifrar_Ruta">Descifrar Ruta</string>
+    <string name="Cifrar_SDES">Cifrar S-DES</string>
+    <string name="Descifrar_SDES">Descifrar S-DES</string>
     <string name="menu_Salir">Salir</string>
 </resources>

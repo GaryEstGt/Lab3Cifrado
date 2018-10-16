@@ -19,11 +19,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".DZigzag" />
-        <activity android:name=".CTransposicion" />
         <activity android:name=".DTransposicion" />
-        <activity android:name=".CCesar" />
-        <activity android:name=".DCesar" />
-        <activity android:name=".CRuta"></activity>
+        <activity android:name=".CRuta" />
+        <activity android:name=".CSDES" />
+        <activity android:name=".DSDES"></activity>
     </application>
 
 </manifest>
