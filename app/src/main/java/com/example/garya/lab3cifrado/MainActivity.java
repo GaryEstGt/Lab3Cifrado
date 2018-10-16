@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         SDES sdes = new SDES();
         sdes.GenerarLlaves("1010101010");
         sdes.Cifrar('A');
+        sdes.Descifrar('¹');
     }
 
     @Override
