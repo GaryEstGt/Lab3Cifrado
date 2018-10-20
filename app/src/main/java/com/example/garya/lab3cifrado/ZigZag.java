@@ -132,7 +132,17 @@ public class ZigZag {
                     }
                 }
 
-                cadenaDescifrada.replaceAll("¬", "");
+                int contarExtra = 0;
+                for (int i = cadenaDescifrada.length() - 1; i > -1; i++) {
+                    if(cadenaDescifrada.charAt(i) != '¬'){
+                        break;
+                    }
+                    else
+                    {
+                        contarExtra++;
+                    }
+                }
+                cadenaDescifrada = cadenaDescifrada.substring(0, (cadenaDescifrada.length() - contarExtra));
 
                 return cadenaDescifrada;
             }

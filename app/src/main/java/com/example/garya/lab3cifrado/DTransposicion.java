@@ -51,20 +51,32 @@ public class DTransposicion extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_CZigzag:
-                Intent intentCZig = new Intent(DTransposicion.this, MainActivity.class);
-                startActivity(intentCZig);
+                finish();
+                Intent intentCZ = new Intent(DTransposicion.this, MainActivity.class);
+                startActivity(intentCZ);
                 return true;
             case R.id.menu_DZigzag:
+                finish();
                 Intent intentDZig = new Intent(DTransposicion.this, DZigzag.class);
                 startActivity(intentDZig);
                 return true;
             case R.id.menu_CTransposicion:
-                Intent intentDT = new Intent(DTransposicion.this, CRuta.class);
-                startActivity(intentDT);
-
+                finish();
+                Intent intentCT = new Intent(DTransposicion.this, CRuta.class);
+                startActivity(intentCT);
                 return true;
             case R.id.menu_DTransposicion:
-                Toast.makeText(this.getApplicationContext(), "Ya esta en descifrar Ruta", Toast.LENGTH_LONG).show();
+                Toast.makeText(this.getApplicationContext(), "Ya esta en Descifrar Ruta", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.menu_CSDES:
+                finish();
+                Intent intentCS = new Intent(DTransposicion.this, CSDES.class);
+                startActivity(intentCS);
+                return true;
+            case R.id.menu_DSDES:
+                finish();
+                Intent intentDS = new Intent(DTransposicion.this, DSDES.class);
+                startActivity(intentDS);
                 return true;
             case R.id.Salir:
                 finish();
@@ -153,7 +165,7 @@ public class DTransposicion extends AppCompatActivity {
                         Toast.makeText(this.getApplicationContext(), "Archivo cargado con éxito", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(this.getApplicationContext(), "Error al cargar el archivo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this.getApplicationContext(), "Error al cargar el archivo, verifique si tiene permisos de almacenamiento", Toast.LENGTH_LONG).show();
                 }
                 break;
             case 1:

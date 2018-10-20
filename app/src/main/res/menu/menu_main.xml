@@ -5,28 +5,36 @@
     <item
         android:id="@+id/menu_CZigzag"
         android:title="@string/Cifrar_ZigZag"
+        android:orderInCategory="1"
         app:showAsAction="never"/>
     <item
         android:id="@+id/menu_DZigzag"
-        android:icon="@android:drawable/ic_menu_search"
         android:orderInCategory="2"
         android:title="@string/Descifrar_ZigZag"
         app:showAsAction="never" />
     <item
-        android:id="@+id/menu_DTransposicion"
+        android:id="@+id/menu_CTransposicion"
         android:orderInCategory="3"
-        android:title="@string/Descifrar_Transposicion"
+        android:title="@string/Cifrar_Ruta"
         app:showAsAction="never" />
     <item
-        android:id="@+id/menu_CTransposicion"
-        android:layout_height="match_parent"
-        android:icon="@android:drawable/ic_menu_search"
-        android:orderInCategory="2"
-        android:title="@string/Cifrar_Transposicion"
+        android:id="@+id/menu_DTransposicion"
+        android:orderInCategory="4"
+        android:title="@string/Descifrar_Ruta"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_CSDES"
+        android:orderInCategory="5"
+        android:title="@string/Cifrar_SDES"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_DSDES"
+        android:orderInCategory="6"
+        android:title="@string/Descifrar_SDES"
         app:showAsAction="never" />
     <item
         android:id="@+id/Salir"
-        android:orderInCategory="4"
+        android:orderInCategory="7"
         android:title="@string/menu_Salir"
         app:showAsAction="never" />
 </menu>

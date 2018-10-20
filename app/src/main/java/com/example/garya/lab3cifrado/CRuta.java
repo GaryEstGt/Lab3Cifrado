@@ -51,10 +51,12 @@ public class CRuta extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_CZigzag:
-                Intent intentCZig = new Intent(CRuta.this, MainActivity.class);
-                startActivity(intentCZig);
+                finish();
+                Intent intentCZ = new Intent(CRuta.this, MainActivity.class);
+                startActivity(intentCZ);
                 return true;
             case R.id.menu_DZigzag:
+                finish();
                 Intent intentDZig = new Intent(CRuta.this, DZigzag.class);
                 startActivity(intentDZig);
                 return true;
@@ -62,8 +64,19 @@ public class CRuta extends AppCompatActivity {
                 Toast.makeText(this.getApplicationContext(), "Ya esta en Cifrar Ruta", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.menu_DTransposicion:
+                finish();
                 Intent intentDT = new Intent(CRuta.this, DTransposicion.class);
                 startActivity(intentDT);
+                return true;
+            case R.id.menu_CSDES:
+                finish();
+                Intent intentCS = new Intent(CRuta.this, CSDES.class);
+                startActivity(intentCS);
+                return true;
+            case R.id.menu_DSDES:
+                finish();
+                Intent intentDS = new Intent(CRuta.this, DSDES.class);
+                startActivity(intentDS);
                 return true;
             case R.id.Salir:
                 finish();
@@ -151,7 +164,7 @@ public class CRuta extends AppCompatActivity {
                         Toast.makeText(this.getApplicationContext(), "Archivo cargado con éxito", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(this.getApplicationContext(), "Error al cargar el archivo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this.getApplicationContext(), "Error al cargar el archivo, verifique si tiene permisos de almacenamiento", Toast.LENGTH_LONG).show();
                 }
                 break;
             case 1:

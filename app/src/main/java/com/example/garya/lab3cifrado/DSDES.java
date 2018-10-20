@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DZigzag extends AppCompatActivity {
+public class DSDES extends AppCompatActivity {
 
     @BindView(R.id.btnAbrirArchivo)
     Button btnAbrirArchivo;
@@ -29,19 +29,19 @@ public class DZigzag extends AppCompatActivity {
     @BindView(R.id.btnDescifrar)
     Button btnDescifrar;
 
-    Uri uri, uri2;
+    Uri uri,uri2;
     String cadenaDescifrada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dzigzag);
+        setContentView(R.layout.activity_dsdes);
         ButterKnife.bind(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -50,31 +50,31 @@ public class DZigzag extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_CZigzag:
                 finish();
-                Intent intentCZ = new Intent(DZigzag.this, MainActivity.class);
+                Intent intentCZ = new Intent(DSDES.this, MainActivity.class);
                 startActivity(intentCZ);
                 return true;
             case R.id.menu_DZigzag:
-                Toast.makeText(this.getApplicationContext(), "Ya esta en Descifrar zig zag", Toast.LENGTH_LONG).show();
+                finish();
+                Intent intentDZig = new Intent(DSDES.this, DZigzag.class);
+                startActivity(intentDZig);
                 return true;
             case R.id.menu_CTransposicion:
                 finish();
-                Intent intentCT = new Intent(DZigzag.this, CRuta.class);
+                Intent intentCT = new Intent(DSDES.this, CRuta.class);
                 startActivity(intentCT);
                 return true;
             case R.id.menu_DTransposicion:
                 finish();
-                Intent intentDT = new Intent(DZigzag.this, DTransposicion.class);
+                Intent intentDT = new Intent(DSDES.this, DTransposicion.class);
                 startActivity(intentDT);
                 return true;
             case R.id.menu_CSDES:
                 finish();
-                Intent intentCS = new Intent(DZigzag.this, CSDES.class);
+                Intent intentCS = new Intent(DSDES.this, CSDES.class);
                 startActivity(intentCS);
                 return true;
             case R.id.menu_DSDES:
-                finish();
-                Intent intentDS = new Intent(DZigzag.this, DSDES.class);
-                startActivity(intentDS);
+                Toast.makeText(this.getApplicationContext(), "Ya esta en Descifrar SDES", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.Salir:
                 finish();
@@ -97,35 +97,34 @@ public class DZigzag extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(intent, "Choose File"), 0);
                 break;
             case R.id.btnDescifrar:
-                if(uri != null){
-                    if(uri.getPath().contains(".cif")){
-                        if(!txtClave.getText().toString().isEmpty()){
-                            cadenaDescifrada = "";
-                            ZigZag zigZag = new ZigZag();
-                            int clave = 0;
-                            try{
-                                clave = Integer.parseInt(txtClave.getText().toString());
-                                cadenaDescifrada = zigZag.Descifrar(tvMostrarArchivo.getText().toString(), clave);
-                                if(cadenaDescifrada != "ERROR"){
+                if (uri != null) {
+                    if (uri.getPath().contains(".scif")) {
+                        if (!txtClave.getText().toString().isEmpty()) {
+                            if(txtClave.getText().toString().length() == 10){
+                                cadenaDescifrada = "";
+                                try {
+                                    SDES sdes = new SDES(txtClave.getText().toString());
+
+                                    for (int i = 0; i < tvMostrarArchivo.getText().toString().length(); i++) {
+                                        cadenaDescifrada += sdes.Descifrar(tvMostrarArchivo.getText().toString().charAt(i));
+                                    }
+
                                     ElegirRutaDescifrado();
-                                }
-                                else{
+
+                                } catch (Exception e) {
                                     Toast.makeText(this.getApplicationContext(), "Error al descifrar", Toast.LENGTH_LONG).show();
                                 }
                             }
-                            catch (Exception e){
-                                Toast.makeText(this.getApplicationContext(), "Error al descifrar", Toast.LENGTH_LONG).show();
+                            else{
+                                Toast.makeText(null,"Debe ingresar una clave de 10 bits", Toast.LENGTH_LONG).show();
                             }
-                        }
-                        else{
+                        } else {
                             Toast.makeText(this.getApplicationContext(), "Debe ingresar la clave del descifrado", Toast.LENGTH_LONG).show();
                         }
+                    } else {
+                        Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo .scif para descifrar", Toast.LENGTH_LONG).show();
                     }
-                    else{
-                        Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo .cif para descifrar", Toast.LENGTH_LONG).show();
-                    }
-                }
-                else{
+                } else {
                     Toast.makeText(this.getApplicationContext(), "Debe elegir un archivo para descifrar", Toast.LENGTH_LONG).show();
                 }
                 break;
@@ -134,39 +133,39 @@ public class DZigzag extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
+        switch (requestCode) {
             case 0:
-                try{
+                try {
                     super.onActivityResult(requestCode, resultCode, data);
                     if (resultCode == RESULT_CANCELED) {
                         //Cancelado por el usuario
-                    }if ((resultCode == RESULT_OK) && (requestCode == 0)) {
+                    }
+                    if ((resultCode == RESULT_OK) && (requestCode == 0)) {
                         //Procesar el resultado
 
                         uri = data.getData();//obtener el uri content
                         String[] texto = uri.getPath().split("/");
                         txtArchivo.setText(texto[texto.length - 1]);
-                        String contenido = Lector.LeerArchivo(this.getApplication(),uri);
+                        String contenido = Lector.LeerArchivo(this.getApplication(), uri);
                         tvMostrarArchivo.setText(contenido);
                         Toast.makeText(this.getApplicationContext(), "Archivo cargado con éxito", Toast.LENGTH_LONG).show();
                     }
-                }catch(Exception e){
+                } catch (Exception e) {
                     Toast.makeText(this.getApplicationContext(), "Error al cargar el archivo, verifique si tiene permisos de almacenamiento", Toast.LENGTH_LONG).show();
                 }
                 break;
             case 1:
                 uri2 = data.getData();
-                if(Escritor.Escribir(uri2, this.getApplication(), cadenaDescifrada)){
+                if (Escritor.Escribir(uri2, this.getApplication(), cadenaDescifrada)) {
                     Toast.makeText(this.getApplicationContext(), "Archivo descifrado en " + uri2.getPath(), Toast.LENGTH_LONG).show();
-                }
-                else{
+                } else {
                     Toast.makeText(this.getApplicationContext(), "Error al generar el archivo descifrado, verifique si la aplicación tiene permisos de escritura", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
     }
 
-    public void ElegirRutaDescifrado(){
+    public void ElegirRutaDescifrado() {
         Intent intent2 = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent2.addCategory(Intent.CATEGORY_OPENABLE);
         intent2.setType("*/*");
