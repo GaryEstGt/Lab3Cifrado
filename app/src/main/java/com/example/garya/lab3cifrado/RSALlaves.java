@@ -36,7 +36,7 @@ public class RSALlaves extends AppCompatActivity {
     @OnClick(R.id.btnGenerarLlaves)
     public void onViewClicked() {
         if(!txtP.getText().toString().isEmpty() && !txtQ.getText().toString().isEmpty()){
-            if(RSA.esPrimo(Long.parseLong(txtP.getText().toString())) && RSA.esPrimo(Long.parseLong(txtQ.getText().toString()))){
+            if(RSA.esPrimo(new BigInteger(txtP.getText().toString())) && RSA.esPrimo(new BigInteger(txtQ.getText().toString()))){
                 if(Long.parseLong(txtP.getText().toString()) >= 13){
                     if(Long.parseLong(txtQ.getText().toString()) >= 17){
                         rsa = new RSA(new BigInteger(txtP.getText().toString()),new BigInteger(txtQ.getText().toString()));

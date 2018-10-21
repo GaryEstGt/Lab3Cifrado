@@ -56,11 +56,11 @@ public class RSA {
         return d.toString() + "," + n.toString();
     }
 
-    public static boolean esPrimo(long num){
+    public static boolean esPrimo(BigInteger num){
         boolean resultado = true;
 
-        for (int i = 2; i <= num/2; i++) {
-            if(num%i == 0){
+        for (BigInteger i = new BigInteger("2"); i.compareTo(num.divide(new BigInteger("2"))) == -1; i = i.add(new BigInteger("2"))) {
+            if(num.mod(i).compareTo(new BigInteger("0")) == 0){
                 resultado = false;
                 break;
             }
