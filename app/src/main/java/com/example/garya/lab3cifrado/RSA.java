@@ -28,8 +28,8 @@ public class RSA {
     }
 
     public String GenerarLlavePublica(){
-        for (long i = 3; i < phi; i++) {
-            if(esPrimo(i) && mcd(i,phi) == 1){
+        for (long i = 3; i < phi; i=i+2) {
+            if(mcd(i,phi) == 1){
                 e = i;
                 break;
             }
