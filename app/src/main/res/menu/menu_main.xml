@@ -33,8 +33,18 @@
         android:title="@string/Descifrar_SDES"
         app:showAsAction="never" />
     <item
-        android:id="@+id/Salir"
+        android:id="@+id/menu_CRSA"
         android:orderInCategory="7"
+        android:title="@string/Cifrar_RSA"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_DRSA"
+        android:orderInCategory="8"
+        android:title="@string/Descifrar_RSA"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/Salir"
+        android:orderInCategory="9"
         android:title="@string/menu_Salir"
         app:showAsAction="never" />
 </menu>

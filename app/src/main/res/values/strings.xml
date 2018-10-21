@@ -6,5 +6,7 @@
     <string name="Descifrar_Ruta">Descifrar Ruta</string>
     <string name="Cifrar_SDES">Cifrar S-DES</string>
     <string name="Descifrar_SDES">Descifrar S-DES</string>
+    <string name="Cifrar_RSA">Cifrar RSA</string>
+    <string name="Descifrar_RSA">Descifrar RSA</string>
     <string name="menu_Salir">Salir</string>
 </resources>
