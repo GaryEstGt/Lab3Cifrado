@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.math.BigInteger;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,7 +39,7 @@ public class RSALlaves extends AppCompatActivity {
             if(RSA.esPrimo(Long.parseLong(txtP.getText().toString())) && RSA.esPrimo(Long.parseLong(txtQ.getText().toString()))){
                 if(Long.parseLong(txtP.getText().toString()) >= 13){
                     if(Long.parseLong(txtQ.getText().toString()) >= 17){
-                        rsa = new RSA(Long.parseLong(txtP.getText().toString()),Long.parseLong(txtQ.getText().toString()));
+                        rsa = new RSA(new BigInteger(txtP.getText().toString()),new BigInteger(txtQ.getText().toString()));
                         ElegirRutaLlavePublica();
                         ElegirRutaLlavePrivada();
                     }

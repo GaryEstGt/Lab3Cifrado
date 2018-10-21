@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigInteger;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -123,7 +125,7 @@ public class CRSA extends AppCompatActivity {
                                     String[] clave = txtClave.getText().toString().split(",");
 
                                     for (int i = 0; i < tvMostrarArchivo.getText().toString().length(); i++) {
-                                        cadenaCifrada += rsa.Cifrar(tvMostrarArchivo.getText().toString().charAt(i),Long.parseLong(clave[0]), Long.parseLong(clave[1]));
+                                        cadenaCifrada += rsa.Cifrar(tvMostrarArchivo.getText().toString().charAt(i),new BigInteger(clave[0]), new BigInteger(clave[1]));
                                     }
 
                                     ElegirRutaCifrado();

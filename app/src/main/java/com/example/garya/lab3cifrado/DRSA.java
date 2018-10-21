@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigInteger;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -123,7 +125,7 @@ public class DRSA extends AppCompatActivity {
                                 String[] clave = txtClave.getText().toString().split(",");
 
                                 for (int i = 0; i < tvMostrarArchivo.getText().toString().length(); i++) {
-                                    cadenaDescifrada += rsa.Descifrar(tvMostrarArchivo.getText().toString().charAt(i),Long.parseLong(clave[0]), Long.parseLong(clave[1]));
+                                    cadenaDescifrada += rsa.Descifrar(tvMostrarArchivo.getText().toString().charAt(i),new BigInteger(clave[0]), new BigInteger(clave[1]));
                                 }
 
                                 ElegirRutaDescifrado();

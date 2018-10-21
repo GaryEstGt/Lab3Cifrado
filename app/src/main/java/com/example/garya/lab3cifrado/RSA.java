@@ -1,35 +1,43 @@
 package com.example.garya.lab3cifrado;
 
-public class RSA {
-    Long e;
-    Long d;
-    Long p;
-    Long q;
-    Long phi;
-    Long n;
+import java.math.BigInteger;
 
-    public RSA(long p, long q){
+public class RSA {
+    BigInteger e;
+    BigInteger d;
+    BigInteger p;
+    BigInteger q;
+    BigInteger phi;
+    BigInteger n;
+
+    public RSA(BigInteger p, BigInteger q){
         this.p = p;
         this.q = q;
-        n = p*q;
-        phi = (p-1)*(q-1);
+        n = p.multiply(q);
+        phi = p.subtract(new BigInteger("1")).multiply(q.subtract(new BigInteger("1")));
     }
 
     public RSA(){
 
     }
 
-    public char Cifrar(char letra, long E, long N){
-        return (char)(Math.pow((int)letra,E)%N);
+    public char Cifrar(char letra, BigInteger E, BigInteger N){
+        Long l;
+        l = (long)letra;
+        BigInteger le = new BigInteger(l.toString());
+        return (char)(le.modPow(E,N)).intValue();
     }
 
-    public char Descifrar(char letra, long D, long N){
-        return (char)(Math.pow((int)letra,D)%N);
+    public char Descifrar(char letra, BigInteger D, BigInteger N){
+        Long l;
+        l = (long)letra;
+        BigInteger le = new BigInteger(l.toString());
+        return (char)(le.modPow(D,N)).intValue();
     }
 
     public String GenerarLlavePublica(){
-        for (long i = 3; i < phi; i=i+2) {
-            if(mcd(i,phi) == 1){
+        for (BigInteger i = new BigInteger("3"); i.compareTo(phi) == -1; i = i.add(new BigInteger("2"))) {
+            if(i.gcd(phi).compareTo(new BigInteger("1")) == 0){
                 e = i;
                 break;
             }
@@ -39,10 +47,10 @@ public class RSA {
     }
 
     public String GenerarLlavePrivada(){
-        d = ModuloInverso(e,phi);
+        d = e.modInverse(phi);
 
-        if(d < 0){
-            d = d+phi;
+        if(d.compareTo(new BigInteger("0")) == -1){
+            d = d.add(phi);
         }
 
         return d.toString() + "," + n.toString();
@@ -61,11 +69,11 @@ public class RSA {
         return resultado;
     }
 
-    public static long mcd(long num1, long num2){
-        long a, b;
-        long mcd = 0;
+    /*public static BigInteger mcd(BigInteger num1, BigInteger num2){
+        BigInteger a, b;
+        BigInteger mcd;
 
-        if(num1 > num2){
+        if(num1.compareTo(num2) == 1){
             a = num1;
             b = num2;
         }
@@ -74,25 +82,25 @@ public class RSA {
             a = num2;
         }
 
-        long residuo = a%b;
+        BigInteger residuo = a.mod(b);
 
-        if(residuo == 0){
+        if(residuo.compareTo(new BigInteger("0")) == 0){
             mcd = b;
         }
         else{
-            while (residuo != 0){
+            while (residuo.compareTo(new BigInteger("0")) != 0){
                 a = b;
                 b = residuo;
-                residuo = a%b;
+                residuo = a.mod(b);
             }
 
             mcd = b;
         }
 
         return mcd;
-    }
+    }*/
 
-    public static long ModuloInverso(long a, long b)
+    /*public static long ModuloInverso(long a, long b)
     {
         long resp = 0;
         long x=0,y=0,d=0;
@@ -124,5 +132,5 @@ public class RSA {
         }
 
         return resp;
-    }
+    }*/
 }
