@@ -82,6 +82,11 @@ public class CRSA extends AppCompatActivity {
                 Intent intentDS = new Intent(CRSA.this, DSDES.class);
                 startActivity(intentDS);
                 return true;
+            case R.id.menu_LRSA:
+                finish();
+                Intent intentLRSA = new Intent(CRSA.this, RSALlaves.class);
+                startActivity(intentLRSA);
+                return true;
             case R.id.menu_CRSA:
                 Toast.makeText(this.getApplicationContext(), "Ya esta en Cifrar RSA", Toast.LENGTH_LONG).show();
                 return true;

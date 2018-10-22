@@ -78,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentDS = new Intent(MainActivity.this, DSDES.class);
                 startActivity(intentDS);
                 return true;
+            case R.id.menu_LRSA:
+                finish();
+                Intent intentLRSA = new Intent(MainActivity.this, RSALlaves.class);
+                startActivity(intentLRSA);
+                return true;
             case R.id.menu_CRSA:
                 finish();
                 Intent intentCR = new Intent(MainActivity.this, CRSA.class);

@@ -78,6 +78,11 @@ public class DTransposicion extends AppCompatActivity {
                 Intent intentDS = new Intent(DTransposicion.this, DSDES.class);
                 startActivity(intentDS);
                 return true;
+            case R.id.menu_LRSA:
+                finish();
+                Intent intentLRSA = new Intent(DTransposicion.this, RSALlaves.class);
+                startActivity(intentLRSA);
+                return true;
             case R.id.menu_CRSA:
                 finish();
                 Intent intentCR = new Intent(DTransposicion.this, CRSA.class);

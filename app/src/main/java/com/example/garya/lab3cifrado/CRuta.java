@@ -78,6 +78,11 @@ public class CRuta extends AppCompatActivity {
                 Intent intentDS = new Intent(CRuta.this, DSDES.class);
                 startActivity(intentDS);
                 return true;
+            case R.id.menu_LRSA:
+                finish();
+                Intent intentLRSA = new Intent(CRuta.this, RSALlaves.class);
+                startActivity(intentLRSA);
+                return true;
             case R.id.menu_CRSA:
                 finish();
                 Intent intentCR = new Intent(CRuta.this, CRSA.class);

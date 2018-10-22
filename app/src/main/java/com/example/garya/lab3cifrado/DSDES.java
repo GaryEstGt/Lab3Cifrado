@@ -76,6 +76,11 @@ public class DSDES extends AppCompatActivity {
             case R.id.menu_DSDES:
                 Toast.makeText(this.getApplicationContext(), "Ya esta en Descifrar SDES", Toast.LENGTH_LONG).show();
                 return true;
+            case R.id.menu_LRSA:
+                finish();
+                Intent intentLRSA = new Intent(DSDES.this, RSALlaves.class);
+                startActivity(intentLRSA);
+                return true;
             case R.id.menu_CRSA:
                 finish();
                 Intent intentCR = new Intent(DSDES.this, CRSA.class);

@@ -82,6 +82,11 @@ public class DRSA extends AppCompatActivity {
                 Intent intentDS = new Intent(DRSA.this, DSDES.class);
                 startActivity(intentDS);
                 return true;
+            case R.id.menu_LRSA:
+                finish();
+                Intent intentLRSA = new Intent(DRSA.this, RSALlaves.class);
+                startActivity(intentLRSA);
+                return true;
             case R.id.menu_CRSA:
                 finish();
                 Intent intentCR = new Intent(DRSA.this, CRSA.class);

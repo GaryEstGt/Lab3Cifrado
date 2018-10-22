@@ -76,6 +76,11 @@ public class DZigzag extends AppCompatActivity {
                 Intent intentDS = new Intent(DZigzag.this, DSDES.class);
                 startActivity(intentDS);
                 return true;
+            case R.id.menu_LRSA:
+                finish();
+                Intent intentLRSA = new Intent(DZigzag.this, RSALlaves.class);
+                startActivity(intentLRSA);
+                return true;
             case R.id.menu_CRSA:
                 finish();
                 Intent intentCR = new Intent(DZigzag.this, CRSA.class);
