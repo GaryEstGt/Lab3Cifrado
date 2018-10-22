@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -40,6 +41,63 @@ public class RSALlaves extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_CZigzag:
+                finish();
+                Intent intentcZig = new Intent(RSALlaves.this, MainActivity.class);
+                startActivity(intentcZig);
+                return true;
+            case R.id.menu_DZigzag:
+                finish();
+                Intent intentDZig = new Intent(RSALlaves.this, DZigzag.class);
+                startActivity(intentDZig);
+                return true;
+            case R.id.menu_CTransposicion:
+                finish();
+                Intent intentCT = new Intent(RSALlaves.this, CRuta.class);
+                startActivity(intentCT);
+                return true;
+            case R.id.menu_DTransposicion:
+                finish();
+                Intent intentDT = new Intent(RSALlaves.this, DTransposicion.class);
+                startActivity(intentDT);
+                return true;
+            case R.id.menu_CSDES:
+                finish();
+                Intent intentCS = new Intent(RSALlaves.this, CSDES.class);
+                startActivity(intentCS);
+                return true;
+            case R.id.menu_DSDES:
+                finish();
+                Intent intentDS = new Intent(RSALlaves.this, DSDES.class);
+                startActivity(intentDS);
+                return true;
+            case R.id.menu_LRSA:
+                Toast.makeText(this.getApplicationContext(), "Ya esta en Generar Llaves RSA", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.menu_CRSA:
+                finish();
+                Intent intentCR = new Intent(RSALlaves.this, CRSA.class);
+                startActivity(intentCR);
+                return true;
+            case R.id.menu_DRSA:
+                finish();
+                Intent intentDR = new Intent(RSALlaves.this, DRSA.class);
+                startActivity(intentDR);
+                return true;
+            case R.id.Salir:
+                finish();
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @OnClick(R.id.btnGenerarLlaves)
     public void onViewClicked() {
