@@ -2,13 +2,12 @@ package com.example.garya.lab3cifrado;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,15 +25,19 @@ public class DRSA extends AppCompatActivity {
     TextView txtArchivo;
     @BindView(R.id.tvMostrarArchivo)
     TextView tvMostrarArchivo;
-    @BindView(R.id.txtClave)
-    EditText txtClave;
     @BindView(R.id.btnDescifrar)
     Button btnDescifrar;
     @BindView(R.id.btnAbrirLlave)
     Button btnAbrirLlave;
-
-    Uri uri,uri2,llave;
+    int opcionAbrir=-1;
+    Uri uri, uri2, llave;
     String cadenaDescifrada;
+    @BindView(R.id.textView)
+    TextView textView;
+    @BindView(R.id.txt)
+    TextView txt;
+    @BindView(R.id.txtClave)
+    TextView txtClave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,14 +114,16 @@ public class DRSA extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnAbrirArchivo:
+                opcionAbrir=0;
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("*/*");
                 startActivityForResult(Intent.createChooser(intent, "Choose File"), 0);
                 break;
             case R.id.btnAbrirLlave:
+                opcionAbrir=1;
                 Intent intent2 = new Intent(Intent.ACTION_GET_CONTENT);
                 intent2.setType("*/*");
-                startActivityForResult(Intent.createChooser(intent2, "Choose File"), 2);
+                startActivityForResult(Intent.createChooser(intent2, "Choose File"), 0);
                 break;
             case R.id.btnDescifrar:
                 if (uri != null) {
@@ -130,14 +135,14 @@ public class DRSA extends AppCompatActivity {
                                 String[] clave = txtClave.getText().toString().split(",");
 
                                 for (int i = 0; i < tvMostrarArchivo.getText().toString().length(); i++) {
-                                    cadenaDescifrada += rsa.Descifrar(tvMostrarArchivo.getText().toString().charAt(i),new BigInteger(clave[0]), new BigInteger(clave[1]));
+                                    cadenaDescifrada += rsa.Descifrar(tvMostrarArchivo.getText().toString().charAt(i), new BigInteger(clave[0]), new BigInteger(clave[1]));
                                 }
 
                                 ElegirRutaDescifrado();
 
-                                } catch (Exception e) {
-                                    Toast.makeText(this.getApplicationContext(), "Error al descifrar", Toast.LENGTH_LONG).show();
-                                }
+                            } catch (Exception e) {
+                                Toast.makeText(this.getApplicationContext(), "Error al descifrar", Toast.LENGTH_LONG).show();
+                            }
                         } else {
                             Toast.makeText(this.getApplicationContext(), "Debe ingresar la clave del descifrado", Toast.LENGTH_LONG).show();
                         }
@@ -155,24 +160,49 @@ public class DRSA extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case 0:
-                try {
-                    super.onActivityResult(requestCode, resultCode, data);
-                    if (resultCode == RESULT_CANCELED) {
-                        //Cancelado por el usuario
-                    }
-                    if ((resultCode == RESULT_OK) && (requestCode == 0)) {
-                        //Procesar el resultado
+                if(opcionAbrir==0){
+                    try {
+                        super.onActivityResult(requestCode, resultCode, data);
+                        if (resultCode == RESULT_CANCELED) {
+                            //Cancelado por el usuario
+                        }
+                        if ((resultCode == RESULT_OK) && (requestCode == 0)) {
+                            //Procesar el resultado
 
-                        uri = data.getData();//obtener el uri content
-                        String[] texto = uri.getPath().split("/");
-                        txtArchivo.setText(texto[texto.length - 1]);
-                        String contenido = Lector.LeerArchivo(this.getApplication(), uri);
-                        tvMostrarArchivo.setText(contenido);
-                        Toast.makeText(this.getApplicationContext(), "Archivo cargado con éxito", Toast.LENGTH_LONG).show();
+                            uri = data.getData();//obtener el uri content
+                            String[] texto = uri.getPath().split("/");
+                            txtArchivo.setText(texto[texto.length - 1]);
+                            String contenido = Lector.LeerArchivo(this.getApplication(), uri);
+                            tvMostrarArchivo.setText(contenido);
+                            Toast.makeText(this.getApplicationContext(), "Archivo cargado con éxito", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(this.getApplicationContext(), "Error al cargar el archivo, verifique si tiene permisos de almacenamiento", Toast.LENGTH_LONG).show();
                     }
-                } catch (Exception e) {
-                    Toast.makeText(this.getApplicationContext(), "Error al cargar el archivo, verifique si tiene permisos de almacenamiento", Toast.LENGTH_LONG).show();
                 }
+                else if(opcionAbrir==1){
+                    try {
+                        super.onActivityResult(requestCode, resultCode, data);
+                        if (resultCode == RESULT_CANCELED) {
+                            //Cancelado por el usuario
+                        }
+                        if ((resultCode == RESULT_OK) && (requestCode == 0)) {
+                            //Procesar el resultado
+
+                            llave = data.getData();//obtener el uri content
+                            String contenido = Lector.LeerArchivo(this.getApplication(), llave);
+                            txtClave.setText(contenido);
+                            Toast.makeText(this.getApplicationContext(), "Llave cargada con éxito", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(this.getApplicationContext(), "Error al cargar la llave, verifique si tiene permisos de almacenamiento", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+                else{
+                    Toast.makeText(this.getApplicationContext(), "Error al cargar la llave, verifique si tiene permisos de almacenamiento", Toast.LENGTH_LONG).show();
+                }
+
                 break;
             case 1:
                 uri2 = data.getData();
@@ -183,21 +213,6 @@ public class DRSA extends AppCompatActivity {
                 }
                 break;
             case 2:
-                try{
-                    super.onActivityResult(requestCode, resultCode, data);
-                    if (resultCode == RESULT_CANCELED) {
-                        //Cancelado por el usuario
-                    }if ((resultCode == RESULT_OK) && (requestCode == 0)) {
-                        //Procesar el resultado
-
-                        llave = data.getData();//obtener el uri content
-                        String contenido = Lector.LeerArchivo(this.getApplication(),llave);
-                        txtClave.setText(contenido);
-                        Toast.makeText(this.getApplicationContext(), "Llave cargada con éxito", Toast.LENGTH_LONG).show();
-                    }
-                }catch(Exception e){
-                    Toast.makeText(this.getApplicationContext(), "Error al cargar la llave, verifique si tiene permisos de almacenamiento", Toast.LENGTH_LONG).show();
-                }
 
                 break;
         }

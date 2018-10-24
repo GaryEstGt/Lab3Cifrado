@@ -24,7 +24,8 @@ public class RSALlaves extends AppCompatActivity {
     EditText txtQ;
     @BindView(R.id.btnGenerarLlaves)
     Button btnGenerarLlaves;
-
+    String llavePublica="";
+    String llavePrivada="";
     Uri uri;
     RSA rsa;
 
@@ -106,6 +107,8 @@ public class RSALlaves extends AppCompatActivity {
                 if(Long.parseLong(txtP.getText().toString()) >= 13){
                     if(Long.parseLong(txtQ.getText().toString()) >= 17){
                         rsa = new RSA(new BigInteger(txtP.getText().toString()),new BigInteger(txtQ.getText().toString()));
+                        llavePublica=rsa.GenerarLlavePublica();
+                        llavePrivada=rsa.GenerarLlavePrivada();
                         ElegirRutaLlavePublica();
                         ElegirRutaLlavePrivada();
                     }
@@ -131,15 +134,15 @@ public class RSALlaves extends AppCompatActivity {
         switch (requestCode) {
             case 1:
                 uri = data.getData();
-                if (Escritor.Escribir(uri, this.getApplication(), rsa.GenerarLlavePrivada())) {
+                if (Escritor.Escribir(uri, this.getApplication(), llavePrivada)) {
                     Toast.makeText(this.getApplicationContext(), "Llave privada generada en" + uri.getPath(), Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(this.getApplicationContext(), "Error al generar la llave privada, verifique si la aplicación tiene permisos de escritura", Toast.LENGTH_LONG).show();
                 }
                 break;
-            case 2:
+            case 0:
                 uri = data.getData();
-                if (Escritor.Escribir(uri, this.getApplication(), rsa.GenerarLlavePublica())) {
+                if (Escritor.Escribir(uri, this.getApplication(), llavePublica)) {
                     Toast.makeText(this.getApplicationContext(), "Llave publica generada en " + uri.getPath(), Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(this.getApplicationContext(), "Error al generar la llave publica, verifique si la aplicación tiene permisos de escritura", Toast.LENGTH_LONG).show();
@@ -162,6 +165,6 @@ public class RSALlaves extends AppCompatActivity {
         intent2.addCategory(Intent.CATEGORY_OPENABLE);
         intent2.setType("*/*");
         intent2.putExtra(Intent.EXTRA_TITLE, "public.key");
-        startActivityForResult(intent2, 2);
+        startActivityForResult(intent2, 0);
     }
 }
