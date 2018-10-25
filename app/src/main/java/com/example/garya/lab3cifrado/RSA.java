@@ -59,8 +59,8 @@ public class RSA {
     public static boolean esPrimo(BigInteger num){
         boolean resultado = true;
 
-        for (BigInteger i = new BigInteger("2"); i.compareTo(num.divide(new BigInteger("2"))) == -1; i = i.add(new BigInteger("2"))) {
-            if(num.mod(i).compareTo(new BigInteger("0")) == 0){
+        for (BigInteger i = new BigInteger("2"); i.compareTo(num) < 0; i = i.add(new BigInteger("1"))) {
+            if(num.mod(i).equals(new BigInteger("0"))){
                 resultado = false;
                 break;
             }

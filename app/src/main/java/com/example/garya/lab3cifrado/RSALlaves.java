@@ -24,8 +24,8 @@ public class RSALlaves extends AppCompatActivity {
     EditText txtQ;
     @BindView(R.id.btnGenerarLlaves)
     Button btnGenerarLlaves;
-    String llavePublica="";
-    String llavePrivada="";
+    String llavePublica;
+    String llavePrivada;
     Uri uri;
     RSA rsa;
 
@@ -104,8 +104,10 @@ public class RSALlaves extends AppCompatActivity {
     public void onViewClicked() {
         if(!txtP.getText().toString().isEmpty() && !txtQ.getText().toString().isEmpty()){
             if(RSA.esPrimo(new BigInteger(txtP.getText().toString())) && RSA.esPrimo(new BigInteger(txtQ.getText().toString()))){
-                if(Long.parseLong(txtP.getText().toString()) >= 13){
-                    if(Long.parseLong(txtQ.getText().toString()) >= 17){
+                if(new BigInteger(txtP.getText().toString()).compareTo(new BigInteger("13")) >= 0){
+                    if(new BigInteger(txtQ.getText().toString()).compareTo(new BigInteger("17")) >= 0){
+                        llavePrivada = "";
+                        llavePublica = "";
                         rsa = new RSA(new BigInteger(txtP.getText().toString()),new BigInteger(txtQ.getText().toString()));
                         llavePublica=rsa.GenerarLlavePublica();
                         llavePrivada=rsa.GenerarLlavePrivada();
